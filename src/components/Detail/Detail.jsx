@@ -29,7 +29,7 @@ export default function Detail(props) {
 
   return (
     <div>
-      <Link to="/"><button>HOME</button></Link>
+      <Link to="/Home"><button>HOME</button></Link>
       <span>Name:{character.name}</span>
       <span>Status:{character.status}</span>
       <span>Species:{character.species}</span>

@@ -1,49 +1,51 @@
 import React from 'react'
+import Validation from './Validation';
+import { useState } from 'react'
+import "./Form.css"
 
-const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+const Form = (props) => {
+    const [userData, setUserData] = useState({
+         username: '', 
+         password: '' });
 
-export const validar =(props)=>{
-  console.log(props);
-  const errors ={};
+    const [errors, setErrors] = useState({
+            username: '', 
+            password: '' });    
 
-  if(!regexEmail.test(props.username)){
-    errors.username = "Debe ser un correo electrónico"
-  }
-  if(!props.username){
-    errors.username = "Debe llenar este campo"
-  }
-  if(props.username){
-    errors.name = "Debe tener 35 carateres o menos"
-  }
-
-  if(props){
-    errors.phone="Sólo números positivos"
-  }
-  return errors;
-}
-
-export default function Form(props) {
-
-  const [userData, setUserData] = React.useState({ username: '', password: '' });
-  const [error, setError]= React.useState({})
-
-
-  const email =(event)=>{
-    setUserData({...userData,[event.target.name]:event.target.value})
-    setError(validar({...error,[event.targe.name]:event.target.value}))
-  }
-
-
+    const handleChange = (event) => {
+        setUserData({...userData,
+            [event.target.name]: event.target.value,
+        })
+        setErrors(
+          Validation({...userData,
+            [event.target.name]: event.target.value 
+        }))
+    }    
+    
+    function handleSubmit (evento){
+      evento.preventDefault()
+      if(Object.keys(errors).length === 0){
+        props.login(userData)
+      }
+      else alert('Debes ingresar los datos correctamente')
+    }
   console.log(userData)
 
 
   return (
-    <div>
+    <div className='logIn-container'>
+      <form onSubmit={handleSubmit}>
       <label>
-        <input onChange={email} type="email" name='username'/>
-        <input onChange={email} type="password" name='password'/>
-        <button onClick={validar}>Log In</button>
+        <h2>Welcome to!</h2>
+        <h2>Rick & Morty App</h2>
+        <input className='email-input' onChange={handleChange} type="email" name='username'  value={userData.username}/>
+        <input className='pass-input' onChange={handleChange} type="password" name='password'value={userData.password}/>
+        <button className='logIn-button' type="submit">Log In</button>
+        
       </label>
+      </form>
     </div>
   )
 }
+
+export default Form;

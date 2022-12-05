@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import "./SearchBar.css"
 
 export default function SeachBar(props) {
 
@@ -10,9 +10,9 @@ export default function SeachBar(props) {
   }
 
   return (
-    <div>
+    <div className='cointainer-searchBar' >
       <input onChange={onSearch} id="input" type="text" placeholder='Escribe la DIMENSION'></input>
-      <button onClick={()=>props.onSearch(stateInput)} type="submit">Agregar</button>
+      <button className='searchBar-button' onClick={()=>props.onSearch(stateInput)} type="submit">Agregar</button>
     </div>
   )
 }

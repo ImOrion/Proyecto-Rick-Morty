@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export default function Nav(props){
   return (
     <div>
-      <Link to="/">Home</Link>
+      <Link to="/Home">Home</Link>
       <Link to="../About">ABOUT</Link>
       <Link to="/">Iniciar Sesión</Link>
       <SearchBar onSearch={props.onSearch}/>
